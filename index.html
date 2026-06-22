@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="tr">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-28V6E3KNZC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-28V6E3KNZC");
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hande Eren Gayrimenkul Danışmanlığı | İstanbul'da Satılık ve Kiralık Gayrimenkul</title>
@@ -288,6 +296,14 @@
       </div>
     </div>
     <div class="footer-bottom">
+      <div class="footer-social">
+        <a href="#" id="social-instagram" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+        </a>
+        <a href="#" id="social-linkedin" aria-label="LinkedIn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div>
       <span>© <span id="year">2026</span> <span data-brand-text="fullName">Hande Eren Gayrimenkul Danışmanlığı</span></span>
       <a href="yonetim-giris.html" style="color:#4A5C5A;">Yönetim</a>
     </div>
@@ -314,6 +330,14 @@
     else { btn.classList.remove("is-hidden-scroll"); }
     lastY = y;
   }, {passive:true});
+})();
+</script>
+<script>
+(function(){
+  var ig = document.getElementById("social-instagram");
+  var li = document.getElementById("social-linkedin");
+  if(ig && BRAND.social.instagram && BRAND.social.instagram !== "#") ig.href = BRAND.social.instagram;
+  if(li && BRAND.social.linkedin && BRAND.social.linkedin !== "#") li.href = BRAND.social.linkedin;
 })();
 </script>
 </body>
