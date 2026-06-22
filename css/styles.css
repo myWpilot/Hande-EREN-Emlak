@@ -281,9 +281,12 @@ h3{font-size:clamp(1.2rem,2vw,1.45rem);}
 .detail-desc{color:#3E4F54;margin-bottom:16px;line-height:1.65;}
 .detail-desc--en{color:#7A8A8C;font-size:0.92rem;}
 
-.footer-social{display:flex;gap:14px;align-items:center;}
-.footer-social a{color:#6E8582;transition:color .15s ease;}
-.footer-social a:hover{color:var(--c-brass-light);}
+.footer-social{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.footer-social a{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:999px;font-size:0.82rem;font-weight:600;transition:opacity .15s ease;text-decoration:none;}
+.footer-social a:hover{opacity:0.85;}
+.footer-social .s-instagram{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;}
+.footer-social .s-linkedin{background:#0A66C2;color:#fff;}
+.footer-social svg{width:16px;height:16px;flex-shrink:0;}
 
 /* ---------- yüzen WhatsApp butonu ---------- */
 .whatsapp-float{position:fixed;bottom:28px;right:28px;z-index:999;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.45);transition:transform .2s ease, box-shadow .2s ease, opacity .3s ease;}
