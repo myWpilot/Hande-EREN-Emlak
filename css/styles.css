@@ -281,6 +281,13 @@ h3{font-size:clamp(1.2rem,2vw,1.45rem);}
 .detail-desc{color:#3E4F54;margin-bottom:16px;line-height:1.65;}
 .detail-desc--en{color:#7A8A8C;font-size:0.92rem;}
 
+/* ---------- yüzen WhatsApp butonu ---------- */
+.whatsapp-float{position:fixed;bottom:28px;right:28px;z-index:999;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.45);transition:transform .2s ease, box-shadow .2s ease, opacity .3s ease;}
+.whatsapp-float:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,0.6);}
+.whatsapp-float svg{width:30px;height:30px;}
+.whatsapp-float.is-hidden-scroll{opacity:0;pointer-events:none;}
+@media (max-width:540px){.whatsapp-float{bottom:18px;right:16px;width:52px;height:52px;}}
+
 /* ---------- generic light panel (admin tool reuse) ---------- */
 .panel{background:var(--c-white);border:1px solid var(--c-line);border-radius:var(--radius-md);padding:32px;}
 
@@ -296,3 +303,8 @@ h3{font-size:clamp(1.2rem,2vw,1.45rem);}
 .code-box{width:100%;min-height:220px;background:var(--c-deep-2);color:#D8E4E2;font-family:var(--font-mono);font-size:0.85rem;line-height:1.6;border:none;border-radius:var(--radius-md);padding:20px;resize:vertical;}
 .copy-row{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap;}
 .copy-feedback{font-size:0.86rem;color:var(--c-azure);font-weight:600;opacity:0;transition:opacity .2s ease;}
+
+/* ---------- sabit WhatsApp butonu ---------- */
+.wa-float{position:fixed;bottom:24px;right:24px;z-index:999;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.25);transition:transform .2s ease,box-shadow .2s ease;}
+.wa-float:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(0,0,0,0.32);}
+.wa-float svg{width:30px;height:30px;fill:#fff;}
