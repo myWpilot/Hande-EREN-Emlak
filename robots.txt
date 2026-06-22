@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /yonetim-giris.html
+Disallow: /yonetim-panel.html
+Disallow: /ilan-ekle.html
+
+Sitemap: https://www.handeeren.com/sitemap.xml
