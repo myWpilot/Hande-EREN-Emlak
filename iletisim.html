@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>İletişim | Hande Eren Gayrimenkul Danışmanlığı</title>
+<meta name="description" content="Fener Emlak ile iletişime geçin; ofis bilgileri, harita ve iletişim formu.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23122B33'/%3E%3Ctext x='32' y='44' font-family='Georgia,%20serif' font-size='22' fill='%23B08D57' text-anchor='middle'%3EHE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="build-note">Bu sayfadaki firma adı, ilan ve danışman bilgileri örnektir. Yayına almadan önce <code>js/data.js</code> dosyasını güncelleyin.</div>
+<a class="skip-link" href="#main">İçeriğe geç</a>
+
+<header class="site-header">
+  <div class="container site-header__bar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" style="font-size:0.75rem;font-weight:700;font-family:var(--font-display);letter-spacing:-0.02em;">HE</span>
+      <span>
+        <span data-brand-text="name">Hande Eren</span>
+        <span class="brand__tag" data-brand-text="tagline">Kadıköy &amp; İstanbul Gayrimenkul Danışmanı</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Ana menü">
+      <ul>
+        <li><a href="index.html">Anasayfa</a></li>
+        <li><a href="ilanlar.html">İlanlar</a></li>
+        <li><a href="hakkimda.html">Hakkımda</a></li>
+        <li><a href="iletisim.html" aria-current="page">İletişim</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--primary header-cta" data-brand-href="whatsapp" href="#">WhatsApp ile Yazın</a>
+    <button class="nav-toggle" aria-label="Menüyü aç" aria-expanded="false" aria-controls="mobile-menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobile-menu" aria-label="Mobil menü">
+    <a href="index.html">Anasayfa</a>
+    <a href="ilanlar.html">İlanlar</a>
+    <a href="hakkimda.html">Hakkımda</a>
+    <a href="iletisim.html" aria-current="page">İletişim</a>
+    <a data-brand-href="whatsapp" href="#">WhatsApp ile Yazın</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="hero" style="padding-bottom:0;">
+    <div class="container hero__inner" style="padding-bottom:80px;max-width:620px;">
+      <span class="eyebrow">İletişim</span>
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);">Size nasıl yardımcı olabiliriz?</h1>
+      <p class="lede">Formu doldurun ya da doğrudan ofisi arayın; en kısa sürede dönüş yaparız.</p>
+    </div>
+    <div style="position:absolute;bottom:0;left:0;right:0;">
+      <svg viewBox="0 0 1440 64" preserveAspectRatio="none" width="100%" height="64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g fill="var(--c-mist)" transform="translate(0,64) scale(1,-1)">
+          <rect x="0" y="0" width="90" height="30"/><rect x="90" y="0" width="70" height="18"/>
+          <rect x="160" y="0" width="100" height="42"/><rect x="260" y="0" width="60" height="22"/>
+          <rect x="320" y="0" width="110" height="50"/><rect x="430" y="0" width="75" height="28"/>
+          <rect x="505" y="0" width="95" height="16"/><rect x="600" y="0" width="120" height="46"/>
+          <rect x="720" y="0" width="65" height="24"/><rect x="785" y="0" width="100" height="38"/>
+          <rect x="885" y="0" width="80" height="20"/><rect x="965" y="0" width="115" height="48"/>
+          <rect x="1080" y="0" width="70" height="26"/><rect x="1150" y="0" width="95" height="40"/>
+          <rect x="1245" y="0" width="75" height="18"/><rect x="1320" y="0" width="120" height="44"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <section class="section section--white" style="padding-top:64px;">
+    <div class="container">
+      <div class="contact-layout">
+        <div>
+          <form id="contact-form" class="contact-form" novalidate>
+            <div class="form-row form-row--split">
+              <div class="form-field">
+                <label for="c-name">Ad Soyad</label>
+                <input id="c-name" name="fullName" type="text" autocomplete="name" required>
+              </div>
+              <div class="form-field">
+                <label for="c-phone">Telefon</label>
+                <input id="c-phone" name="phone" type="tel" autocomplete="tel" required>
+              </div>
+            </div>
+            <div class="form-row form-row--split">
+              <div class="form-field">
+                <label for="c-email">E-posta</label>
+                <input id="c-email" name="email" type="email" autocomplete="email" required>
+              </div>
+              <div class="form-field">
+                <label for="c-subject">İlgilendiğiniz İşlem</label>
+                <select id="c-subject" name="subject">
+                  <option value="satin-alma">Satın almak istiyorum</option>
+                  <option value="satis">Mülkümü satmak istiyorum</option>
+                  <option value="kiralama">Kiralamak istiyorum</option>
+                  <option value="kiraya-verme">Mülkümü kiraya vermek istiyorum</option>
+                  <option value="diger">Diğer</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="c-message">Mesajınız</label>
+                <textarea id="c-message" name="message" placeholder="İhtiyacınızı kısaca anlatın..." required></textarea>
+              </div>
+            </div>
+            <button class="btn btn--primary btn--block" type="submit">Mesajı Gönder</button>
+            <p class="form-note">Bu form şu an yalnızca tarayıcıda bir onay mesajı gösterir. Gerçek e-posta gönderimi için <code>README.md</code> dosyasındaki adımları izleyin.</p>
+          </form>
+
+          <div class="form-success" id="form-success" role="status" tabindex="-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg>
+            <div>
+              <h3 style="color:var(--c-white);margin-bottom:6px;">Mesajınız alındı</h3>
+              <p style="color:#CBDAD7;">Danışmanlarımızdan biri en kısa sürede size dönüş yapacak. Acil durumlarda WhatsApp üzerinden de yazabilirsiniz.</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="info-card">
+            <h3>İletişim Bilgileri</h3>
+            <ul class="info-list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-7.6 7-12.2A7 7 0 0 0 5 8.8C5 13.4 12 21 12 21z"/><circle cx="12" cy="9" r="2.4"/></svg>
+                <span data-brand-text="addressLines">Kadıköy, İstanbul</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8a16 16 0 0 0 6.6 6.6l2.2-2.2a1.6 1.6 0 0 1 1.6-.4 11 11 0 0 0 3.4.6 1.6 1.6 0 0 1 1.6 1.6V20a1.6 1.6 0 0 1-1.6 1.6A17.6 17.6 0 0 1 2.4 4 1.6 1.6 0 0 1 4 2.4h3.2A1.6 1.6 0 0 1 8.8 4a11 11 0 0 0 .6 3.4 1.6 1.6 0 0 1-.4 1.6z"/></svg>
+                <a data-brand-href="tel" href="#" style="color:#CBDAD7;"><span data-brand-text="phoneDisplay">0212 000 00 00</span></a>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.5h17v11h-17z"/><path d="M3.5 6.5l8.5 7 8.5-7"/></svg>
+                <a data-brand-href="mail" href="#" style="color:#CBDAD7;"><span data-brand-text="email">info@kiyigayrimenkul.com.tr</span></a>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+                <span data-brand-text="hours">Hafta içi 09:00–19:00</span>
+              </li>
+            </ul>
+          </div>
+          <div class="map-frame">
+            <iframe id="map-frame" src="about:blank" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ofis konumu haritası"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand">
+          <span class="brand__mark" style="font-size:0.75rem;font-weight:700;font-family:var(--font-display);letter-spacing:-0.02em;">HE</span>
+          <span>
+            <span data-brand-text="name">Hande Eren</span>
+            <span class="brand__tag" data-brand-text="tagline">Kadıköy &amp; İstanbul Gayrimenkul Danışmanı</span>
+          </span>
+        </div>
+        <p data-brand-text="fullName">Hande Eren Gayrimenkul Danışmanlığı</p>
+      </div>
+      <div>
+        <h4>Hızlı Bağlantılar</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Anasayfa</a></li>
+          <li><a href="ilanlar.html">İlanlar</a></li>
+          <li><a href="hakkimda.html">Hakkımda</a></li>
+          <li><a href="iletisim.html">İletişim</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>İletişim</h4>
+        <ul class="footer-links">
+          <li data-brand-text="addressLines">Kadıköy, İstanbul</li>
+          <li><a data-brand-href="tel" href="#"><span data-brand-text="phoneDisplay">0212 000 00 00</span></a></li>
+          <li><a data-brand-href="mail" href="#"><span data-brand-text="email">info@kiyigayrimenkul.com.tr</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> <span data-brand-text="fullName">Hande Eren Gayrimenkul Danışmanlığı</span></span>
+      <a href="yonetim-giris.html" style="color:#4A5C5A;">Yönetim</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

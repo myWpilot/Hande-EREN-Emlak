@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ekibimiz | Fener Emlak Danışmanlığı</title>
+<meta name="description" content="Fener Emlak danışmanlarıyla tanışın; her biri belirli bir İstanbul bölgesinde uzmanlaşmıştır.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23122B33'/%3E%3Cpolygon points='24,50 40,50 36,24 28,24' fill='%23B08D57'/%3E%3Crect x='27' y='18' width='10' height='8' fill='%23EEF1EE'/%3E%3Cpolygon points='25,18 39,18 32,9' fill='%23B08D57'/%3E%3Cpolygon points='36,21 56,12 56,30' fill='%23EEF1EE' opacity='0.85'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="build-note">Bu sayfadaki firma adı, ilan ve danışman bilgileri örnektir. Yayına almadan önce <code>js/data.js</code> dosyasını güncelleyin.</div>
+<a class="skip-link" href="#main">İçeriğe geç</a>
+
+<header class="site-header">
+  <div class="container site-header__bar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><polygon points="9,19 15,19 13.5,9 10.5,9"/><rect x="10" y="6" width="4" height="3.5"/><polygon points="9.5,6 14.5,6 12,3"/></svg></span>
+      <span>
+        <span data-brand-text="name">Fener</span>
+        <span class="brand__tag" data-brand-text="tagline">İstanbul Gayrimenkul Danışmanlığı</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Ana menü">
+      <ul>
+        <li><a href="index.html">Anasayfa</a></li>
+        <li><a href="ilanlar.html">İlanlar</a></li>
+        <li><a href="ekibimiz.html" aria-current="page">Ekibimiz</a></li>
+        <li><a href="iletisim.html">İletişim</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--primary header-cta" data-brand-href="whatsapp" href="#">WhatsApp ile Yazın</a>
+    <button class="nav-toggle" aria-label="Menüyü aç" aria-expanded="false" aria-controls="mobile-menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobile-menu" aria-label="Mobil menü">
+    <a href="index.html">Anasayfa</a>
+    <a href="ilanlar.html">İlanlar</a>
+    <a href="ekibimiz.html" aria-current="page">Ekibimiz</a>
+    <a href="iletisim.html">İletişim</a>
+    <a data-brand-href="whatsapp" href="#">WhatsApp ile Yazın</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="hero" style="padding-bottom:0;">
+    <div class="container hero__inner" style="padding-bottom:80px;max-width:620px;">
+      <span class="eyebrow">Ekibimiz</span>
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);">Bölgeyi bilen danışmanlarla çalışın</h1>
+      <p class="lede">Her danışman belirli bir bölgede uzmanlaşır; size en uygun olanı yönlendiririz.</p>
+    </div>
+    <div style="position:absolute;bottom:0;left:0;right:0;">
+      <svg viewBox="0 0 1440 64" preserveAspectRatio="none" width="100%" height="64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g fill="var(--c-mist)" transform="translate(0,64) scale(1,-1)">
+          <rect x="0" y="0" width="90" height="30"/><rect x="90" y="0" width="70" height="18"/>
+          <rect x="160" y="0" width="100" height="42"/><rect x="260" y="0" width="60" height="22"/>
+          <rect x="320" y="0" width="110" height="50"/><rect x="430" y="0" width="75" height="28"/>
+          <rect x="505" y="0" width="95" height="16"/><rect x="600" y="0" width="120" height="46"/>
+          <rect x="720" y="0" width="65" height="24"/><rect x="785" y="0" width="100" height="38"/>
+          <rect x="885" y="0" width="80" height="20"/><rect x="965" y="0" width="115" height="48"/>
+          <rect x="1080" y="0" width="70" height="26"/><rect x="1150" y="0" width="95" height="40"/>
+          <rect x="1245" y="0" width="75" height="18"/><rect x="1320" y="0" width="120" height="44"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <section class="section section--white" style="padding-top:64px;">
+    <div class="container">
+      <div class="team-grid" id="team-grid"></div>
+    </div>
+  </section>
+
+  <section class="section section--deep section--tight">
+    <div class="container" style="text-align:center;">
+      <h2 style="margin-bottom:12px;">Hangi danışmanla görüşmeniz gerektiğinden emin değil misiniz?</h2>
+      <p class="lede" style="margin:0 auto 24px;">Bize yazın, ihtiyacınıza göre doğru danışmana yönlendirelim.</p>
+      <a class="btn btn--primary" href="iletisim.html">İletişime Geç</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand">
+          <span class="brand__mark"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><polygon points="9,19 15,19 13.5,9 10.5,9"/><rect x="10" y="6" width="4" height="3.5"/><polygon points="9.5,6 14.5,6 12,3"/></svg></span>
+          <span>
+            <span data-brand-text="name">Fener</span>
+            <span class="brand__tag" data-brand-text="tagline">İstanbul Gayrimenkul Danışmanlığı</span>
+          </span>
+        </div>
+        <p data-brand-text="fullName">Fener Emlak Danışmanlığı</p>
+      </div>
+      <div>
+        <h4>Hızlı Bağlantılar</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Anasayfa</a></li>
+          <li><a href="ilanlar.html">İlanlar</a></li>
+          <li><a href="ekibimiz.html">Ekibimiz</a></li>
+          <li><a href="iletisim.html">İletişim</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>İletişim</h4>
+        <ul class="footer-links">
+          <li data-brand-text="addressLines">Kadıköy, İstanbul</li>
+          <li><a data-brand-href="tel" href="#"><span data-brand-text="phoneDisplay">0212 000 00 00</span></a></li>
+          <li><a data-brand-href="mail" href="#"><span data-brand-text="email">info@kiyigayrimenkul.com.tr</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> <span data-brand-text="fullName">Fener Emlak Danışmanlığı</span></span>
+      <a href="yonetim-giris.html" style="color:#4A5C5A;">Yönetim</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

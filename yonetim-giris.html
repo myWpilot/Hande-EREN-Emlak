@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yönetim Girişi | Hande Eren Gayrimenkul Danışmanlığı</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23122B33'/%3E%3Ctext x='32' y='44' font-family='Georgia,%20serif' font-size='22' fill='%23B08D57' text-anchor='middle'%3EHE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg, var(--c-deep) 0%, var(--c-deep-2) 100%);padding:24px;}
+  .login-card{width:100%;max-width:380px;background:var(--c-white);border-radius:var(--radius-md);padding:36px 32px;box-shadow:0 24px 60px rgba(0,0,0,0.35);}
+  .login-card .brand{justify-content:center;margin-bottom:28px;}
+  .login-card h1{font-size:1.3rem;text-align:center;margin-bottom:6px;}
+  .login-card p.sub{text-align:center;color:#7A8A8C;font-size:0.88rem;margin-bottom:28px;}
+  .login-error{display:none;background:#FBE9E7;color:#A23B2E;border-radius:var(--radius-sm);padding:10px 14px;font-size:0.85rem;margin-bottom:16px;}
+  .login-error.is-visible{display:block;}
+  .login-setup-note{display:none;background:#FFF6E0;color:#7A5E1E;border-radius:var(--radius-sm);padding:14px 16px;font-size:0.85rem;margin-bottom:20px;line-height:1.55;}
+  .login-setup-note.is-visible{display:block;}
+</style>
+</head>
+<body>
+<div class="login-wrap">
+  <div class="login-card">
+    <div class="brand">
+      <span class="brand__mark" style="font-size:0.75rem;font-weight:700;font-family:var(--font-display);letter-spacing:-0.02em;">HE</span>
+      <span>
+        <span data-brand-text="name">Hande Eren</span>
+        <span class="brand__tag" data-brand-text="tagline">Kadıköy &amp; İstanbul Gayrimenkul Danışmanı</span>
+      </span>
+    </div>
+    <h1>Yönetim Girişi</h1>
+    <p class="sub">İlanlarınızı eklemek ve düzenlemek için giriş yapın.</p>
+
+    <div class="login-setup-note" id="setup-note">
+      Bu panel henüz bağlanmamış. <code>js/firebase-config.js</code> dosyasını
+      <code>FIREBASE-PANEL-KURULUMU.md</code> kılavuzuna göre doldurmanız gerekiyor.
+    </div>
+
+    <div class="login-error" id="login-error"></div>
+
+    <form id="login-form" autocomplete="off">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="email">E-posta</label>
+          <input id="email" name="email" type="email" required autocomplete="username">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="password">Şifre</label>
+          <input id="password" name="password" type="password" required autocomplete="current-password">
+        </div>
+      </div>
+      <button class="btn btn--primary btn--block" type="submit" id="login-btn">Giriş Yap</button>
+    </form>
+    <p style="text-align:center;margin-top:18px;">
+      <a href="index.html" style="font-size:0.85rem;color:#7A8A8C;">← Siteye Dön</a>
+    </p>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/firebase-config.js"></script>
+<script>
+  document.querySelectorAll('[data-brand-text]').forEach(function(el){
+    const key = el.getAttribute('data-brand-text');
+    if (BRAND[key] !== undefined) el.textContent = BRAND[key];
+  });
+  if(!FIREBASE_ENABLED){
+    document.getElementById('setup-note').classList.add('is-visible');
+    document.getElementById('login-form').querySelectorAll('input,button').forEach(function(el){ el.disabled = true; });
+  }
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+  if (typeof FIREBASE_ENABLED !== 'undefined' && FIREBASE_ENABLED) {
+    const app = initializeApp(FIREBASE_CONFIG);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, function(user){
+      if (user) window.location.href = 'yonetim-panel.html';
+    });
+
+    const form = document.getElementById('login-form');
+    const errorBox = document.getElementById('login-error');
+    const btn = document.getElementById('login-btn');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      errorBox.classList.remove('is-visible');
+      btn.disabled = true;
+      btn.textContent = 'Giriş yapılıyor…';
+      signInWithEmailAndPassword(auth, form.email.value.trim(), form.password.value)
+        .then(function(){
+          window.location.href = 'yonetim-panel.html';
+        })
+        .catch(function(err){
+          btn.disabled = false;
+          btn.textContent = 'Giriş Yap';
+          let msg = 'Giriş başarısız. Bilgilerinizi kontrol edin.';
+          if (err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found') {
+            msg = 'E-posta veya şifre hatalı.';
+          } else if (err.code === 'auth/too-many-requests') {
+            msg = 'Çok fazla deneme yapıldı, lütfen biraz sonra tekrar deneyin.';
+          }
+          errorBox.textContent = msg;
+          errorBox.classList.add('is-visible');
+        });
+    });
+  }
+</script>
+</body>
+</html>

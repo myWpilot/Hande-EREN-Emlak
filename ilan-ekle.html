@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>İlan Ekleme Aracı | Hande Eren Gayrimenkul Danışmanlığı</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23122B33'/%3E%3Ctext x='32' y='44' font-family='Georgia,%20serif' font-size='22' fill='%23B08D57' text-anchor='middle'%3EHE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="build-note">Bu sayfa yalnızca site sahibi içindir; herkese açık menüde yer almaz. Google E-Tablosu kurduysanız bu aracı kullanmanıza gerek kalmaz — formunuzu doldurmanız yeterlidir.</div>
+
+<header class="site-header">
+  <div class="container site-header__bar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" style="font-size:0.75rem;font-weight:700;font-family:var(--font-display);letter-spacing:-0.02em;">HE</span>
+      <span>
+        <span data-brand-text="name">Hande Eren</span>
+        <span class="brand__tag">Yönetim Aracı</span>
+      </span>
+    </a>
+    <a class="btn btn--outline btn--sm" href="index.html" style="border-color:rgba(255,255,255,0.4);color:#fff;">← Siteye Dön</a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="section section--white" style="padding-top:56px;padding-bottom:56px;">
+    <div class="container" style="max-width:980px;">
+      <span class="eyebrow">Yönetim Aracı</span>
+      <h1 style="margin-bottom:14px;">Yeni İlan Ekle</h1>
+      <p class="lede" style="margin-bottom:40px;max-width:680px;">Google E-Tablonuz yoksa veya tek bir ilanı hızlıca eklemek istiyorsanız bu aracı kullanın. Doldurdukça <code>js/data.js</code>'e yapıştıracağınız kod ve kartın görüneceği hâli oluşur.</p>
+
+      <div class="mini-steps">
+        <div class="mini-step">
+          <span class="mini-step__num">01</span>
+          <h3>Formu doldurun</h3>
+          <p>Sağ tarafta kartın canlı önizlemesini görürsünüz.</p>
+        </div>
+        <div class="mini-step">
+          <span class="mini-step__num">02</span>
+          <h3>Kodu kopyalayın</h3>
+          <p>Alttaki "Panoya Kopyala" düğmesini kullanın.</p>
+        </div>
+        <div class="mini-step">
+          <span class="mini-step__num">03</span>
+          <h3>data.js'e yapıştırın</h3>
+          <p><code>LISTINGS</code> dizisinin içine ekleyip siteyi yeniden yükleyin (deploy).</p>
+        </div>
+      </div>
+
+      <div style="display:grid;gap:32px;grid-template-columns:1fr;">
+        <form id="listing-form" class="panel" autocomplete="off">
+          <div class="form-row form-row--split">
+            <div class="form-field">
+              <label for="i-id">İlan Numarası (id)</label>
+              <input id="i-id" name="listingId" type="number" value="10" min="1" step="1">
+            </div>
+            <div class="form-field">
+              <label for="i-deal">İşlem</label>
+              <select id="i-deal" name="deal">
+                <option value="satilik">Satılık</option>
+                <option value="kiralik">Kiralık</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="i-title">Başlık</label>
+              <input id="i-title" name="headline" type="text" placeholder="Örn: Bahçeli, ferah aile dairesi">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="i-title-en">Başlık (İngilizce) — isteğe bağlı</label>
+              <input id="i-title-en" name="headlineEn" type="text" placeholder="Örn: Spacious family apartment with garden">
+            </div>
+          </div>
+
+          <div class="form-row form-row--split">
+            <div class="form-field">
+              <label for="i-district">İlçe</label>
+              <input id="i-district" name="district" type="text" placeholder="Örn: Kadıköy">
+            </div>
+            <div class="form-field">
+              <label for="i-neighborhood">Semt — isteğe bağlı</label>
+              <input id="i-neighborhood" name="neighborhood" type="text" placeholder="Örn: Moda">
+            </div>
+          </div>
+
+          <div class="form-row form-row--split">
+            <div class="form-field">
+              <label for="i-category">Kategori</label>
+              <select id="i-category" name="category">
+                <option value="Konut">Konut</option>
+                <option value="Ticari">Ticari</option>
+                <option value="Arsa">Arsa</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="i-type">Tür</label>
+              <select id="i-type" name="type">
+                <option value="Daire">Daire</option>
+                <option value="Villa">Villa</option>
+                <option value="Ofis">Ofis</option>
+                <option value="Dükkan">Dükkan</option>
+                <option value="Arsa">Arsa</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="i-tapu">Tapu Durumu — isteğe bağlı</label>
+              <select id="i-tapu" name="tapuDurumu">
+                <option value="">Belirtilmedi</option>
+                <option value="Kat Mülkiyetli">Kat Mülkiyetli</option>
+                <option value="Kat İrtifaklı">Kat İrtifaklı</option>
+                <option value="Müstakil Tapu">Müstakil Tapu</option>
+                <option value="Arsa Tapulu">Arsa Tapulu</option>
+                <option value="Hisseli Tapu">Hisseli Tapu</option>
+                <option value="Tapu Kaydı Yok">Tapu Kaydı Yok</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row form-row--split">
+            <div class="form-field">
+              <label for="i-price">Fiyat (₺)</label>
+              <input id="i-price" name="price" type="number" min="0" step="1000" placeholder="Örn: 8750000">
+            </div>
+            <div class="form-field">
+              <label for="i-discount">İndirimli Fiyat (₺) — isteğe bağlı</label>
+              <input id="i-discount" name="discountedPrice" type="number" min="0" step="1000" placeholder="Boş bırakılabilir">
+            </div>
+          </div>
+
+          <div class="form-row form-row--split">
+            <div class="form-field">
+              <label for="i-gross">Brüt m²</label>
+              <input id="i-gross" name="grossArea" type="number" min="0" step="1" placeholder="Örn: 150">
+            </div>
+            <div class="form-field">
+              <label for="i-net">Net m²</label>
+              <input id="i-net" name="netArea" type="number" min="0" step="1" placeholder="Örn: 135">
+            </div>
+          </div>
+
+          <div class="form-row form-row--split">
+            <div class="form-field">
+              <label for="i-rooms">Oda Sayısı</label>
+              <input id="i-rooms" name="rooms" type="text" placeholder="Örn: 3+1">
+            </div>
+            <div class="form-field">
+              <label for="i-age">Bina Yaşı — isteğe bağlı</label>
+              <input id="i-age" name="buildingAge" type="number" min="0" step="1" placeholder="0 = sıfır bina">
+            </div>
+          </div>
+
+          <div class="form-row form-row--split">
+            <div class="form-field">
+              <label for="i-floor">Bulunduğu Kat — isteğe bağlı</label>
+              <input id="i-floor" name="floor" type="number" step="1" placeholder="Boş bırakılabilir">
+            </div>
+            <div class="form-field">
+              <label for="i-total-floor">Toplam Kat — isteğe bağlı</label>
+              <input id="i-total-floor" name="totalFloors" type="number" min="0" step="1" placeholder="Boş bırakılabilir">
+            </div>
+          </div>
+
+          <div class="form-row form-row--split">
+            <div class="form-field">
+              <label for="i-status">Durum</label>
+              <select id="i-status" name="status">
+                <option value="aktif">Aktif</option>
+                <option value="satildi">Satıldı</option>
+                <option value="kiralandi">Kiralandı</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="i-featured">Öne Çıkarılsın mı?</label>
+              <select id="i-featured" name="featured">
+                <option value="hayir">Hayır</option>
+                <option value="evet">Evet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="i-images">Fotoğraf Bağlantıları — isteğe bağlı, virgülle ayırın</label>
+              <input id="i-images" name="images" type="text" placeholder="https://... , https://...">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="i-desc">Açıklama</label>
+              <textarea id="i-desc" name="desc" placeholder="Örn: Sakin bir sokakta, güneye bakan, yenilenmiş bir daire."></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="i-desc-en">Açıklama (İngilizce) — isteğe bağlı</label>
+              <textarea id="i-desc-en" name="descEn" placeholder="Optional English description"></textarea>
+            </div>
+          </div>
+        </form>
+
+        <div>
+          <h3 style="margin-bottom:16px;">Önizleme</h3>
+          <div class="listing-grid" style="grid-template-columns:1fr;max-width:380px;margin-bottom:32px;" id="preview-card"></div>
+
+          <h3 style="margin-bottom:16px;">data.js'e yapıştıracağınız kod</h3>
+          <textarea id="generated-code" class="code-box" readonly spellcheck="false"></textarea>
+          <div class="copy-row">
+            <button class="btn btn--primary btn--sm" type="button" id="copy-btn">Panoya Kopyala</button>
+            <span class="copy-feedback" id="copy-feedback">Kopyalandı ✓</span>
+          </div>
+          <p class="form-note">Bu kodu <code>js/data.js</code> dosyasını açıp <code>LISTINGS = [</code> satırının hemen altına yapıştırın, dosyayı kaydedin ve siteyi yeniden yükleyin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0;">
+      <span>© <span id="year">2026</span> <span data-brand-text="fullName">Hande Eren Gayrimenkul Danışmanlığı</span> — Yönetim Aracı</span>
+      <a href="index.html" style="color:#9FB3B0;">Siteye Dön</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  function escapeJSString(str){
+    return String(str).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+  }
+  function numOrNull(v){ return (v === '' || v === null || v === undefined) ? null : Number(v); }
+
+  function currentListingObject(){
+    var f = document.getElementById('listing-form');
+    return {
+      id: parseInt(f.listingId.value || '0', 10) || 0,
+      title: f.headline.value.trim() || 'İlan başlığı',
+      titleEn: f.headlineEn.value.trim(),
+      district: f.district.value.trim() || 'Bölge',
+      neighborhood: f.neighborhood.value.trim(),
+      category: f.category.value,
+      type: f.type.value,
+      deal: f.deal.value,
+      tapuDurumu: f.tapuDurumu.value,
+      price: parseInt(f.price.value || '0', 10) || 0,
+      discountedPrice: numOrNull(f.discountedPrice.value),
+      grossArea: numOrNull(f.grossArea.value),
+      netArea: numOrNull(f.netArea.value),
+      rooms: f.rooms.value.trim() || '—',
+      buildingAge: numOrNull(f.buildingAge.value),
+      floor: numOrNull(f.floor.value),
+      totalFloors: numOrNull(f.totalFloors.value),
+      status: f.status.value,
+      featured: f.featured.value === 'evet',
+      art: TYPE_TO_ART[f.type.value] || 'apart',
+      images: f.images.value.trim() ? f.images.value.split(',').map(function(s){ return s.trim(); }).filter(Boolean) : [],
+      desc: f.desc.value.trim() || '',
+      descEn: f.descEn.value.trim()
+    };
+  }
+
+  function jsVal(v){
+    if(v === null) return 'null';
+    if(typeof v === 'number') return String(v);
+    if(typeof v === 'boolean') return String(v);
+    if(Array.isArray(v)) return '[' + v.map(function(s){ return "'" + escapeJSString(s) + "'"; }).join(', ') + ']';
+    return "'" + escapeJSString(v) + "'";
+  }
+
+  function buildCodeSnippet(o){
+    var lines = ['id','title','titleEn','district','neighborhood','category','type','deal','tapuDurumu',
+      'price','discountedPrice','grossArea','netArea','rooms','buildingAge','floor','totalFloors',
+      'status','featured','art','images','desc','descEn'];
+    var body = lines.map(function(key){ return '    ' + key + ': ' + jsVal(o[key]); }).join(',\n');
+    return '  {\n' + body + '\n  },';
+  }
+
+  function updateTool(){
+    var o = currentListingObject();
+    document.getElementById('preview-card').innerHTML = listingCardHTML(o);
+    document.getElementById('generated-code').value = buildCodeSnippet(o);
+  }
+
+  document.getElementById('listing-form').addEventListener('input', updateTool);
+  updateTool();
+
+  document.getElementById('copy-btn').addEventListener('click', function(){
+    var ta = document.getElementById('generated-code');
+    ta.focus();
+    ta.select();
+    var feedback = document.getElementById('copy-feedback');
+    function flash(msg){
+      feedback.textContent = msg;
+      feedback.style.opacity = '1';
+      setTimeout(function(){ feedback.style.opacity = '0'; }, 2200);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(ta.value).then(function(){
+        flash('Kopyalandı ✓');
+      }).catch(function(){
+        try{ document.execCommand('copy'); flash('Kopyalandı ✓'); }
+        catch(e){ flash('Lütfen metni elle seçip Ctrl+C yapın'); }
+      });
+    } else {
+      try{ document.execCommand('copy'); flash('Kopyalandı ✓'); }
+      catch(e){ flash('Lütfen metni elle seçip Ctrl+C yapın'); }
+    }
+  });
+</script>
+</body>
+</html>

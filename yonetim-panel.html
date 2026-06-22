@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yönetim Paneli | Hande Eren Gayrimenkul Danışmanlığı</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23122B33'/%3E%3Ctext x='32' y='44' font-family='Georgia,%20serif' font-size='22' fill='%23B08D57' text-anchor='middle'%3EHE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  .panel-header{background:var(--c-deep);color:#fff;padding:18px 0;}
+  .panel-header .container{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .panel-header .brand{color:#fff;}
+  .panel-user{display:flex;align-items:center;gap:14px;font-size:0.85rem;color:#C9D6D4;}
+  .panel-body{padding:36px 0 80px;}
+  .panel-toprow{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap;}
+  .panel-table{width:100%;border-collapse:collapse;background:var(--c-white);border-radius:var(--radius-md);overflow:hidden;box-shadow:0 1px 0 var(--c-line);}
+  .panel-table th{text-align:left;font-size:0.74rem;text-transform:uppercase;letter-spacing:0.04em;color:#7A8A8C;padding:12px 16px;border-bottom:1px solid var(--c-line);}
+  .panel-table td{padding:12px 16px;border-bottom:1px solid var(--c-line);font-size:0.9rem;vertical-align:middle;}
+  .panel-table tr:last-child td{border-bottom:none;}
+  .panel-thumb{width:54px;height:40px;border-radius:6px;object-fit:cover;background:var(--c-mist);display:block;}
+  .panel-badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:0.72rem;font-weight:600;background:var(--c-mist);color:var(--c-deep);}
+  .panel-badge--inactive{background:#E9EDEC;color:#7A8A8C;}
+  .panel-actions{display:flex;gap:8px;}
+  .icon-btn{border:1px solid var(--c-line);background:#fff;border-radius:8px;padding:6px 10px;font-size:0.8rem;cursor:pointer;color:var(--c-deep);}
+  .icon-btn:hover{background:var(--c-mist);}
+  .icon-btn--danger{color:#A23B2E;border-color:#F0D9D5;}
+  .hidden{display:none !important;}
+  .form-row--3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+  @media (max-width:720px){.form-row--3{grid-template-columns:1fr;}}
+  .photo-upload-zone{border:2px dashed var(--c-line);border-radius:var(--radius-md);padding:24px;text-align:center;cursor:pointer;color:#7A8A8C;font-size:0.88rem;}
+  .photo-upload-zone:hover{border-color:var(--c-brass);color:var(--c-deep);}
+  .photo-previews{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+  .photo-preview{position:relative;width:84px;height:64px;border-radius:8px;overflow:hidden;}
+  .photo-preview img{width:100%;height:100%;object-fit:cover;display:block;}
+  .photo-preview button{position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:50%;border:none;background:rgba(0,0,0,0.6);color:#fff;font-size:12px;line-height:1;cursor:pointer;}
+  .upload-status{font-size:0.82rem;color:#7A8A8C;margin-top:8px;}
+  .panel-empty{text-align:center;padding:60px 20px;color:#7A8A8C;}
+  .setup-banner{background:#FFF6E0;color:#7A5E1E;padding:14px 20px;border-radius:var(--radius-sm);font-size:0.88rem;margin-bottom:24px;line-height:1.6;}
+</style>
+</head>
+<body>
+
+<header class="panel-header">
+  <div class="container">
+    <div class="brand">
+      <span class="brand__mark" style="font-size:0.75rem;font-weight:700;font-family:var(--font-display);letter-spacing:-0.02em;">HE</span>
+      <span>
+        <span data-brand-text="name">Hande Eren</span>
+        <span class="brand__tag" style="color:#9FB3B0;">Yönetim Paneli</span>
+      </span>
+    </div>
+    <div class="panel-user">
+      <a href="index.html" style="font-size:0.85rem;color:#C9D6D4;" target="_blank" rel="noopener">Siteyi Görüntüle ↗</a>
+      <span id="panel-user-email">—</span>
+      <button class="btn btn--outline btn--sm" id="logout-btn" style="border-color:rgba(255,255,255,0.4);color:#fff;">Çıkış Yap</button>
+    </div>
+  </div>
+</header>
+
+<main class="panel-body">
+  <div class="container" style="max-width:1100px;">
+
+    <div class="setup-banner hidden" id="setup-banner">
+      Bu panel henüz bağlanmamış. <code>js/firebase-config.js</code> dosyasını
+      <code>FIREBASE-PANEL-KURULUMU.md</code> kılavuzuna göre doldurun.
+    </div>
+
+    <!-- LİSTE GÖRÜNÜMÜ -->
+    <section id="view-list">
+      <div class="panel-toprow">
+        <div>
+          <h1 style="margin-bottom:4px;">İlan Listesi</h1>
+          <p style="color:#7A8A8C;font-size:0.9rem;" id="list-count">Yükleniyor…</p>
+        </div>
+        <button class="btn btn--primary" id="new-listing-btn">+ Yeni İlan Ekle</button>
+      </div>
+
+      <div id="list-table-wrap">
+        <table class="panel-table" id="panel-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>İlan</th>
+              <th>İlçe</th>
+              <th>Fiyat</th>
+              <th>Öne Çıkan</th>
+              <th>Durum</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="panel-table-body"></tbody>
+        </table>
+      </div>
+      <div class="panel-empty hidden" id="panel-empty">
+        <h3>Henüz ilan eklenmemiş</h3>
+        <p>Sağ üstteki "+ Yeni İlan Ekle" butonuyla ilk ilanınızı oluşturun.</p>
+      </div>
+    </section>
+
+    <!-- FORM GÖRÜNÜMÜ -->
+    <section id="view-form" class="hidden">
+      <div class="panel-toprow">
+        <h1 id="form-title">Yeni İlan Ekle</h1>
+        <button class="btn btn--outline btn--sm" id="back-to-list-btn">← Listeye Dön</button>
+      </div>
+
+      <form id="listing-form" class="panel" autocomplete="off">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="f-title">İlan Başlığı *</label>
+            <input id="f-title" name="listingTitle" type="text" required placeholder="Örn: Bahçeli, ferah aile dairesi">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="f-title-en">İlan Başlığı (İngilizce)</label>
+            <input id="f-title-en" name="titleEn" type="text" placeholder="İsteğe bağlı">
+          </div>
+        </div>
+
+        <div class="form-row--3" style="margin-bottom:18px;">
+          <div class="form-field">
+            <label for="f-province">İl *</label>
+            <select id="f-province" name="province" required></select>
+          </div>
+          <div class="form-field">
+            <label for="f-district">İlçe *</label>
+            <select id="f-district" name="district" required><option value="">Önce il seçin</option></select>
+          </div>
+          <div class="form-field">
+            <label for="f-neighborhood">Semt</label>
+            <input id="f-neighborhood" name="neighborhood" type="text" placeholder="İsteğe bağlı">
+          </div>
+        </div>
+
+        <div class="form-row form-row--split">
+          <div class="form-field">
+            <label for="f-category">Kategori *</label>
+            <select id="f-category" name="category" required>
+              <option value="Konut">Konut</option>
+              <option value="Ticari">Ticari</option>
+              <option value="Arsa">Arsa</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="f-type">Tür *</label>
+            <select id="f-type" name="type" required>
+              <option value="Daire">Daire</option>
+              <option value="Villa">Villa</option>
+              <option value="Ofis">Ofis</option>
+              <option value="Dükkan">Dükkan</option>
+              <option value="Arsa">Arsa</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row form-row--split">
+          <div class="form-field">
+            <label for="f-deal">İşlem *</label>
+            <select id="f-deal" name="deal" required>
+              <option value="satilik">Satılık</option>
+              <option value="kiralik">Kiralık</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="f-tapu">Tapu Durumu</label>
+            <select id="f-tapu" name="tapuDurumu">
+              <option value="">Belirtilmedi</option>
+              <option value="Kat Mülkiyetli">Kat Mülkiyetli</option>
+              <option value="Kat İrtifaklı">Kat İrtifaklı</option>
+              <option value="Müstakil Tapu">Müstakil Tapu</option>
+              <option value="Arsa Tapulu">Arsa Tapulu</option>
+              <option value="Hisseli Tapu">Hisseli Tapu</option>
+              <option value="Tapu Kaydı Yok">Tapu Kaydı Yok</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row form-row--split">
+          <div class="form-field">
+            <label for="f-price">Fiyat (₺) *</label>
+            <input id="f-price" name="price" type="text" inputmode="numeric" required placeholder="Örn: 9.500.000">
+          </div>
+          <div class="form-field">
+            <label for="f-discount">İndirimli Fiyat (₺)</label>
+            <input id="f-discount" name="discountedPrice" type="text" inputmode="numeric" placeholder="İsteğe bağlı">
+          </div>
+        </div>
+
+        <div class="form-row form-row--split">
+          <div class="form-field">
+            <label for="f-gross">Brüt m²</label>
+            <input id="f-gross" name="grossArea" type="number" min="0" step="1">
+          </div>
+          <div class="form-field">
+            <label for="f-net">Net m²</label>
+            <input id="f-net" name="netArea" type="number" min="0" step="1">
+          </div>
+        </div>
+
+        <div class="form-row form-row--split">
+          <div class="form-field">
+            <label for="f-rooms">Oda Sayısı</label>
+            <select id="f-rooms" name="rooms">
+              <option value="1+0 (Stüdyo)">1+0 (Stüdyo)</option>
+              <option value="1+1">1+1</option>
+              <option value="2+1">2+1</option>
+              <option value="2+2">2+2</option>
+              <option value="3+1">3+1</option>
+              <option value="3+2">3+2</option>
+              <option value="4+1">4+1</option>
+              <option value="4+2">4+2</option>
+              <option value="5+1">5+1</option>
+              <option value="5+2">5+2</option>
+              <option value="Dubleks">Dubleks</option>
+              <option value="Triplex">Triplex</option>
+              <option value="Villa Tipi">Villa Tipi</option>
+              <option value="Diğer">Diğer</option>
+              <option value="—">Uygun değil (arsa vb.)</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="f-age">Bina Yaşı</label>
+            <input id="f-age" name="buildingAge" type="number" min="0" step="1" placeholder="0 = sıfır bina">
+          </div>
+        </div>
+
+        <div class="form-row form-row--split">
+          <div class="form-field">
+            <label for="f-floor">Bulunduğu Kat</label>
+            <input id="f-floor" name="floor" type="number" step="1">
+          </div>
+          <div class="form-field">
+            <label for="f-total-floor">Toplam Kat</label>
+            <input id="f-total-floor" name="totalFloors" type="number" min="0" step="1">
+          </div>
+        </div>
+
+        <div class="form-row form-row--split">
+          <div class="form-field">
+            <label for="f-status">Durum</label>
+            <select id="f-status" name="status">
+              <option value="aktif">Aktif</option>
+              <option value="satildi">Satıldı</option>
+              <option value="kiralandi">Kiralandı</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="f-featured">Öne Çıkarılsın mı?</label>
+            <select id="f-featured" name="featured">
+              <option value="hayir">Hayır</option>
+              <option value="evet">Evet</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label>Fotoğraflar</label>
+            <div class="photo-upload-zone" id="photo-drop-zone">
+              <span id="photo-zone-label">Fotoğraf seçmek için tıklayın (birden fazla seçebilirsiniz)</span>
+              <input type="file" id="photo-input" accept="image/*" multiple style="display:none;">
+            </div>
+            <div class="upload-status" id="upload-status"></div>
+            <div class="photo-previews" id="photo-previews"></div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="f-desc">Açıklama</label>
+            <textarea id="f-desc" name="desc" placeholder="Örn: Sakin bir sokakta, güneye bakan, yenilenmiş bir daire."></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="f-desc-en">Açıklama (İngilizce)</label>
+            <textarea id="f-desc-en" name="descEn" placeholder="İsteğe bağlı"></textarea>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:8px;">
+          <button class="btn btn--primary" type="submit" id="save-btn">İlanı Kaydet</button>
+          <button class="btn btn--outline" type="button" id="cancel-btn">Vazgeç</button>
+        </div>
+      </form>
+    </section>
+
+  </div>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/il-ilce-data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.querySelectorAll('[data-brand-text]').forEach(function(el){
+    const key = el.getAttribute('data-brand-text');
+    if (BRAND[key] !== undefined) el.textContent = BRAND[key];
+  });
+  if (!FIREBASE_ENABLED) {
+    document.getElementById('setup-banner').classList.remove('hidden');
+  }
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+  import {
+    getFirestore, collection, addDoc, doc, getDoc, getDocs, updateDoc,
+    deleteDoc, query, orderBy, serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+  if (!FIREBASE_ENABLED) {
+    // Kurulum tamamlanmamış: formu devre dışı bırak, kullanıcıyı bilgilendir.
+    document.getElementById('new-listing-btn').disabled = true;
+    document.getElementById('list-count').textContent = 'Panel henüz bağlanmadı.';
+  } else {
+    const app = initializeApp(FIREBASE_CONFIG);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    onAuthStateChanged(auth, function(user){
+      if (!user) {
+        window.location.href = 'yonetim-giris.html';
+        return;
+      }
+      document.getElementById('panel-user-email').textContent = user.email;
+      loadListingsList();
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', function(){
+      signOut(auth);
+    });
+
+    /* ---------- İl / İlçe cascading ---------- */
+    const provinceSelect = document.getElementById('f-province');
+    const districtSelect = document.getElementById('f-district');
+    Object.keys(IL_ILCE_DATA).sort().forEach(function(il){
+      const opt = document.createElement('option');
+      opt.value = il; opt.textContent = il;
+      provinceSelect.appendChild(opt);
+    });
+    function populateDistricts(il, selectedDistrict){
+      districtSelect.innerHTML = '';
+      const list = IL_ILCE_DATA[il] || [];
+      list.forEach(function(ilce){
+        const opt = document.createElement('option');
+        opt.value = ilce; opt.textContent = ilce;
+        if (selectedDistrict && ilce === selectedDistrict) opt.selected = true;
+        districtSelect.appendChild(opt);
+      });
+    }
+    provinceSelect.addEventListener('change', function(){ populateDistricts(provinceSelect.value); });
+    provinceSelect.value = 'İstanbul';
+    populateDistricts('İstanbul');
+
+    /* ---------- Para birimi formatlama ---------- */
+    function formatCurrencyDigits(raw){
+      const digits = String(raw || '').replace(/\D/g,'');
+      if(!digits) return '';
+      return digits.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+    function parseCurrencyToNumber(formatted){
+      const digits = String(formatted || '').replace(/\D/g,'');
+      return digits ? parseInt(digits,10) : 0;
+    }
+    function attachCurrencyFormatting(input){
+      input.addEventListener('input', function(){
+        const pos = input.value.length;
+        input.value = formatCurrencyDigits(input.value);
+        if (pos !== input.value.length) { /* basit, mükemmel imleç takibi gerekmiyor */ }
+      });
+    }
+    attachCurrencyFormatting(document.getElementById('f-price'));
+    attachCurrencyFormatting(document.getElementById('f-discount'));
+
+    /* ---------- Fotoğraf yükleme (Cloudinary) ---------- */
+    let uploadedImages = [];
+    const dropZone = document.getElementById('photo-drop-zone');
+    const photoInput = document.getElementById('photo-input');
+    const photoPreviews = document.getElementById('photo-previews');
+    const uploadStatus = document.getElementById('upload-status');
+    const cloudinaryReady = !!(CLOUDINARY_CONFIG.cloudName && CLOUDINARY_CONFIG.uploadPreset);
+
+    if (!cloudinaryReady) {
+      document.getElementById('photo-zone-label').textContent = 'Fotoğraf yükleme bağlanmamış (Cloudinary kurulumu gerekli) — FIREBASE-PANEL-KURULUMU.md dosyasına bakın.';
+      dropZone.style.cursor = 'default';
+      dropZone.style.opacity = '0.6';
+    } else {
+      dropZone.addEventListener('click', function(){ photoInput.click(); });
+      photoInput.addEventListener('change', function(){
+        const files = Array.from(photoInput.files || []);
+        if(!files.length) return;
+        uploadStatus.textContent = '0 / ' + files.length + ' fotoğraf yükleniyor…';
+        let done = 0;
+        files.forEach(function(file){
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('upload_preset', CLOUDINARY_CONFIG.uploadPreset);
+          fetch('https://api.cloudinary.com/v1_1/' + CLOUDINARY_CONFIG.cloudName + '/image/upload', {
+            method: 'POST', body: formData
+          })
+          .then(function(res){ return res.json(); })
+          .then(function(data){
+            done++;
+            uploadStatus.textContent = done + ' / ' + files.length + ' fotoğraf yüklendi.';
+            if (data.secure_url) {
+              uploadedImages.push(data.secure_url);
+              renderPhotoPreviews();
+            }
+            if (done === files.length) {
+              setTimeout(function(){ uploadStatus.textContent = ''; }, 2500);
+            }
+          })
+          .catch(function(){
+            done++;
+            uploadStatus.textContent = 'Bir fotoğraf yüklenemedi, diğerlerine devam ediliyor…';
+          });
+        });
+        photoInput.value = '';
+      });
+    }
+    function renderPhotoPreviews(){
+      photoPreviews.innerHTML = uploadedImages.map(function(url, i){
+        return '<div class="photo-preview"><img src="' + url + '" alt=""><button type="button" data-i="' + i + '">×</button></div>';
+      }).join('');
+      photoPreviews.querySelectorAll('button').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          uploadedImages.splice(parseInt(btn.getAttribute('data-i'),10), 1);
+          renderPhotoPreviews();
+        });
+      });
+    }
+
+    /* ---------- Görünüm geçişleri ---------- */
+    const viewList = document.getElementById('view-list');
+    const viewForm = document.getElementById('view-form');
+    const form = document.getElementById('listing-form');
+    let currentEditId = null;
+
+    function showListView(){
+      viewForm.classList.add('hidden');
+      viewList.classList.remove('hidden');
+      loadListingsList();
+    }
+    function showFormView(editing){
+      viewList.classList.add('hidden');
+      viewForm.classList.remove('hidden');
+      document.getElementById('form-title').textContent = editing ? 'İlanı Düzenle' : 'Yeni İlan Ekle';
+    }
+    function resetForm(){
+      form.reset();
+      uploadedImages = [];
+      renderPhotoPreviews();
+      currentEditId = null;
+      provinceSelect.value = 'İstanbul';
+      populateDistricts('İstanbul');
+    }
+
+    document.getElementById('new-listing-btn').addEventListener('click', function(){
+      resetForm();
+      showFormView(false);
+    });
+    document.getElementById('back-to-list-btn').addEventListener('click', showListView);
+    document.getElementById('cancel-btn').addEventListener('click', showListView);
+
+    /* ---------- Listeyi yükle ---------- */
+    function loadListingsList(){
+      const tbody = document.getElementById('panel-table-body');
+      const countEl = document.getElementById('list-count');
+      const emptyEl = document.getElementById('panel-empty');
+      const tableWrap = document.getElementById('list-table-wrap');
+      countEl.textContent = 'Yükleniyor…';
+      getDocs(query(collection(db, 'listings'), orderBy('createdAt', 'desc')))
+        .then(function(snapshot){
+          if (snapshot.empty) {
+            countEl.textContent = '0 ilan';
+            tableWrap.classList.add('hidden');
+            emptyEl.classList.remove('hidden');
+            return;
+          }
+          tableWrap.classList.remove('hidden');
+          emptyEl.classList.add('hidden');
+          countEl.textContent = snapshot.size + ' ilan listelendi';
+          tbody.innerHTML = '';
+          snapshot.forEach(function(docSnap){
+            const l = docSnap.data();
+            const id = docSnap.id;
+            const thumb = (l.images && l.images.length) ? l.images[0] : '';
+            const tr = document.createElement('tr');
+            tr.innerHTML =
+              '<td>' + (thumb ? '<img class="panel-thumb" src="' + thumb + '" alt="">' : '<div class="panel-thumb"></div>') + '</td>' +
+              '<td>' + (l.title || '—') + '</td>' +
+              '<td>' + (l.district || '—') + '</td>' +
+              '<td>' + (l.price ? Number(l.price).toLocaleString('tr-TR') + ' ₺' : '—') + '</td>' +
+              '<td>' + (l.featured ? '<span class="panel-badge">Evet</span>' : '<span class="panel-badge panel-badge--inactive">Hayır</span>') + '</td>' +
+              '<td>' + (l.status === 'aktif' ? '<span class="panel-badge">Aktif</span>' : '<span class="panel-badge panel-badge--inactive">' + (STATUS_LABEL[l.status] || l.status) + '</span>') + '</td>' +
+              '<td class="panel-actions">' +
+                '<button class="icon-btn" data-edit="' + id + '">Düzenle</button>' +
+                '<button class="icon-btn icon-btn--danger" data-delete="' + id + '">Sil</button>' +
+              '</td>';
+            tbody.appendChild(tr);
+          });
+          tbody.querySelectorAll('[data-edit]').forEach(function(btn){
+            btn.addEventListener('click', function(){ openForEdit(btn.getAttribute('data-edit')); });
+          });
+          tbody.querySelectorAll('[data-delete]').forEach(function(btn){
+            btn.addEventListener('click', function(){ deleteListing(btn.getAttribute('data-delete')); });
+          });
+        })
+        .catch(function(err){
+          countEl.textContent = 'Liste yüklenemedi: ' + err.message;
+        });
+    }
+
+    function openForEdit(id){
+      getDoc(doc(db, 'listings', id)).then(function(docSnap){
+        if (!docSnap.exists()) return;
+        const l = docSnap.data();
+        currentEditId = id;
+        form.listingTitle.value = l.title || '';
+        form.titleEn.value = l.titleEn || '';
+        provinceSelect.value = l.province || 'İstanbul';
+        populateDistricts(provinceSelect.value, l.district);
+        form.neighborhood.value = l.neighborhood || '';
+        form.category.value = l.category || 'Konut';
+        form.type.value = l.type || 'Daire';
+        form.deal.value = l.deal || 'satilik';
+        form.tapuDurumu.value = l.tapuDurumu || '';
+        form.price.value = formatCurrencyDigits(l.price);
+        form.discountedPrice.value = l.discountedPrice ? formatCurrencyDigits(l.discountedPrice) : '';
+        form.grossArea.value = l.grossArea || '';
+        form.netArea.value = l.netArea || '';
+        if (l.rooms) form.rooms.value = l.rooms;
+        form.buildingAge.value = (l.buildingAge === 0 ? 0 : (l.buildingAge || ''));
+        form.floor.value = (l.floor === 0 ? 0 : (l.floor || ''));
+        form.totalFloors.value = l.totalFloors || '';
+        form.status.value = l.status || 'aktif';
+        form.featured.value = l.featured ? 'evet' : 'hayir';
+        form.desc.value = l.desc || '';
+        form.descEn.value = l.descEn || '';
+        uploadedImages = (l.images || []).slice();
+        renderPhotoPreviews();
+        showFormView(true);
+      });
+    }
+
+    function deleteListing(id){
+      if (!confirm('Bu ilanı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.')) return;
+      deleteDoc(doc(db, 'listings', id)).then(loadListingsList);
+    }
+
+    /* ---------- Kaydet ---------- */
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const saveBtn = document.getElementById('save-btn');
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Kaydediliyor…';
+
+      const data = {
+        title: form.listingTitle.value.trim(),
+        titleEn: form.titleEn.value.trim(),
+        province: provinceSelect.value,
+        district: districtSelect.value,
+        neighborhood: form.neighborhood.value.trim(),
+        category: form.category.value,
+        type: form.type.value,
+        deal: form.deal.value,
+        tapuDurumu: form.tapuDurumu.value,
+        price: parseCurrencyToNumber(form.price.value),
+        discountedPrice: form.discountedPrice.value ? parseCurrencyToNumber(form.discountedPrice.value) : null,
+        grossArea: form.grossArea.value ? Number(form.grossArea.value) : null,
+        netArea: form.netArea.value ? Number(form.netArea.value) : null,
+        rooms: form.rooms.value,
+        buildingAge: form.buildingAge.value !== '' ? Number(form.buildingAge.value) : null,
+        floor: form.floor.value !== '' ? Number(form.floor.value) : null,
+        totalFloors: form.totalFloors.value !== '' ? Number(form.totalFloors.value) : null,
+        status: form.status.value,
+        featured: form.featured.value === 'evet',
+        art: TYPE_TO_ART[form.type.value] || 'apart',
+        images: uploadedImages.slice(),
+        desc: form.desc.value.trim(),
+        descEn: form.descEn.value.trim()
+      };
+
+      const savePromise = currentEditId
+        ? updateDoc(doc(db, 'listings', currentEditId), data)
+        : addDoc(collection(db, 'listings'), Object.assign({}, data, { createdAt: serverTimestamp() }));
+
+      savePromise.then(function(){
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'İlanı Kaydet';
+        showListView();
+      }).catch(function(err){
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'İlanı Kaydet';
+        alert('Kaydedilemedi: ' + err.message);
+      });
+    });
+  }
+</script>
+</body>
+</html>
