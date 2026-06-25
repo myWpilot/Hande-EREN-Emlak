@@ -290,7 +290,7 @@ function listingCardHTML(l){
     : '<span class="listing-card__badge' + (l.deal==='kiralik' ? ' listing-card__badge--rent' : '') + '">' + dealLabel(l.deal) + '</span>';
 
   const visual = (l.images && l.images.length)
-    ? '<img src="' + l.images[0] + '" alt="' + l.title + '" loading="lazy">'
+    ? '<img src="' + l.images[0] + '" alt="' + l.title + '" loading="lazy" width="400" height="280" style="width:100%;height:100%;object-fit:cover;">'
     : (ART[l.art] || ART.apart);
 
   const area = l.netArea || l.grossArea;
