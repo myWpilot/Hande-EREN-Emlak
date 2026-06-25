@@ -18,8 +18,8 @@
   --c-stone:#D9D4C8;
   --c-stone-light:#EDEAE2;
   --c-line:#D7DBD8;
-  --font-display:'Fraunces', 'Georgia', serif;
-  --font-body:'Work Sans', system-ui, sans-serif;
+  --font-display:'Georgia', 'Times New Roman', serif;
+  --font-body:system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono:'Courier New', 'Lucida Console', monospace;
   --radius-sm:6px;
   --radius-md:14px;
