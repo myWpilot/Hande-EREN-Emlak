@@ -11,8 +11,8 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>İlanlar | Hande Eren Gayrimenkul Danışmanlığı</title>
-<meta name="description" content="Hande Eren'in İstanbul genelindeki satılık ve kiralık daire, villa, ofis ve arsa ilanlarını inceleyin.">
+<title>İletişim | Hande Eren Gayrimenkul Danışmanlığı</title>
+<meta name="description" content="Hande Eren ile iletişime geçin; e-posta, WhatsApp ve iletişim formu.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="favicon.svg">
 <link rel="stylesheet" href="css/styles.css">
@@ -32,9 +32,12 @@
     <nav class="nav" aria-label="Ana menü">
       <ul>
         <li><a href="index.html">Anasayfa</a></li>
-        <li><a href="ilanlar.html" aria-current="page">İlanlar</a></li>
+        <li><a href="ilanlar.html">İlanlar</a></li>
+        <li><a href="blog.html">Pusula</a></li>
+        <li><a href="sss.html">SSS</a></li>
+        <li><a href="bana-mulk-bul.html">Bana Mülk Bul</a></li>
         <li><a href="hakkimda.html">Hakkımda</a></li>
-        <li><a href="iletisim.html">İletişim</a></li>
+        <li><a href="iletisim.html" aria-current="page">İletişim</a></li>
       </ul>
     </nav>
     <a class="btn btn--primary header-cta" data-brand-href="whatsapp" href="#">WhatsApp ile Yazın</a>
@@ -44,9 +47,12 @@
   </div>
   <nav class="mobile-nav" id="mobile-menu" aria-label="Mobil menü">
     <a href="index.html">Anasayfa</a>
-    <a href="ilanlar.html" aria-current="page">İlanlar</a>
+    <a href="ilanlar.html">İlanlar</a>
+    <a href="blog.html">Pusula</a>
+    <a href="sss.html">SSS</a>
+    <a href="bana-mulk-bul.html">Bana Mülk Bul</a>
     <a href="hakkimda.html">Hakkımda</a>
-    <a href="iletisim.html">İletişim</a>
+    <a href="iletisim.html" aria-current="page">İletişim</a>
     <a data-brand-href="whatsapp" href="#">WhatsApp ile Yazın</a>
   </nav>
 </header>
@@ -55,12 +61,12 @@
 
   <section class="hero" style="padding-bottom:0;">
     <div class="container hero__inner" style="padding-bottom:80px;max-width:620px;">
-      <span class="eyebrow">İlanlar</span>
-      <h1 style="font-size:clamp(2rem,4vw,2.8rem);">Satılık ve kiralık portföyümüz</h1>
-      <p class="lede">Bölge, işlem türü ve bütçenize göre filtreleyin; beğendiğiniz ilan için doğrudan danışmana yazın.</p>
+      <span class="eyebrow">İletişim</span>
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);">Size nasıl yardımcı olabiliriz?</h1>
+      <p class="lede">Formu doldurun ya da doğrudan ofisi arayın; en kısa sürede dönüş yaparız.</p>
     </div>
-    <div class="skyline--divider" style="position:absolute;bottom:0;left:0;right:0;background:transparent;">
-      <svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <div style="position:absolute;bottom:0;left:0;right:0;">
+      <svg viewBox="0 0 1440 64" preserveAspectRatio="none" width="100%" height="64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <g fill="var(--c-mist)" transform="translate(0,64) scale(1,-1)">
           <rect x="0" y="0" width="90" height="30"/><rect x="90" y="0" width="70" height="18"/>
           <rect x="160" y="0" width="100" height="42"/><rect x="260" y="0" width="60" height="22"/>
@@ -77,60 +83,78 @@
 
   <section class="section section--white" style="padding-top:64px;">
     <div class="container">
+      <div class="contact-layout">
+        <div>
+          <form id="contact-form" class="contact-form" action="https://formspree.io/f/mojoevbp" method="POST" novalidate>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="c-name">Ad Soyad</label>
+                <input id="c-name" name="fullName" type="text" autocomplete="name" required>
+              </div>
+            </div>
+            <div class="form-row form-row--split">
+              <div class="form-field">
+                <label for="c-email">E-posta</label>
+                <input id="c-email" name="email" type="email" autocomplete="email" required>
+              </div>
+              <div class="form-field">
+                <label for="c-subject">İlgilendiğiniz İşlem</label>
+                <select id="c-subject" name="subject">
+                  <option value="satin-alma">Satın almak istiyorum</option>
+                  <option value="satis">Mülkümü satmak istiyorum</option>
+                  <option value="kiralama">Kiralamak istiyorum</option>
+                  <option value="kiraya-verme">Mülkümü kiraya vermek istiyorum</option>
+                  <option value="diger">Diğer</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="c-message">Mesajınız</label>
+                <textarea id="c-message" name="message" placeholder="İhtiyacınızı kısaca anlatın..." required></textarea>
+              </div>
+            </div>
+            <input type="hidden" name="_subject" value="İletişim Formu — handeeren.com">
+            <button class="btn btn--primary btn--block" type="submit">Mesajı Gönder</button>
+          </form>
 
-      <div class="filter-bar">
-        <form id="filter-form">
-          <div class="field">
-            <label for="f-deal">İşlem</label>
-            <select id="f-deal" name="deal">
-              <option value="hepsi">Satılık / Kiralık</option>
-              <option value="satilik">Satılık</option>
-              <option value="kiralik">Kiralık</option>
-            </select>
+          <div class="form-success" id="form-success" role="status" tabindex="-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg>
+            <div>
+              <h3 style="color:var(--c-white);margin-bottom:6px;">Mesajınız alındı</h3>
+              <p style="color:#CBDAD7;">Danışmanlarımızdan biri en kısa sürede size dönüş yapacak. Acil durumlarda WhatsApp üzerinden de yazabilirsiniz.</p>
+            </div>
           </div>
-          <div class="field">
-            <label for="f-type">Tür</label>
-            <select id="f-type" name="type">
-              <option value="hepsi">Tümü</option>
-              <option value="Daire">Daire</option>
-              <option value="Villa">Villa</option>
-              <option value="Ofis">Ofis</option>
-              <option value="Dükkan">Dükkan</option>
-              <option value="Arsa">Arsa</option>
-            </select>
+        </div>
+
+        <div>
+          <div class="info-card">
+            <h3>İletişim Bilgileri</h3>
+            <ul class="info-list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-7.6 7-12.2A7 7 0 0 0 5 8.8C5 13.4 12 21 12 21z"/><circle cx="12" cy="9" r="2.4"/></svg>
+                <span data-brand-text="addressLines">Kadıköy, İstanbul</span>
+              </li>
+
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.5h17v11h-17z"/><path d="M3.5 6.5l8.5 7 8.5-7"/></svg>
+                <a data-brand-href="mail" href="#" style="color:#CBDAD7;"><span data-brand-text="email">hande.eren@kww.com.tr</span></a>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z M12 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.43 1.268 4.876L2 22l5.232-1.244A9.953 9.953 0 0012.004 22C17.53 22 22 17.523 22 12.004 22 6.477 17.53 2 12.004 2z"/></svg>
+                <a data-brand-href="whatsapp" href="#" style="color:#25D366;">WhatsApp ile yazın</a>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+                <span data-brand-text="hours">Hafta içi 09:00–19:00</span>
+              </li>
+            </ul>
           </div>
-          <div class="field">
-            <label for="f-district">Bölge</label>
-            <select id="f-district" name="district">
-              <option value="hepsi">Tüm Bölgeler</option>
-              <option value="Kadıköy">Kadıköy</option>
-              <option value="Beşiktaş">Beşiktaş</option>
-              <option value="Beykoz">Beykoz</option>
-              <option value="Şişli">Şişli</option>
-              <option value="Üsküdar">Üsküdar</option>
-              <option value="Çekmeköy">Çekmeköy</option>
-              <option value="Bodrum">Bodrum</option>
-            </select>
+          <div class="map-frame">
+            <iframe id="map-frame" src="about:blank" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ofis konumu haritası"></iframe>
           </div>
-          <div class="field">
-            <label for="f-price">Maks. Fiyat</label>
-            <input id="f-price" type="number" name="maxPrice" placeholder="Sınırsız" min="0" step="1000">
-          </div>
-          <button class="btn btn--outline" type="submit">Filtrele</button>
-        </form>
+        </div>
       </div>
-
-      <p class="filter-result-count" id="filter-result-count">İlanlar yükleniyor…</p>
-      <div class="listing-grid" id="listing-results"></div>
-
-    </div>
-  </section>
-
-  <section class="section section--deep section--tight">
-    <div class="container" style="text-align:center;">
-      <h2 style="margin-bottom:12px;">Aradığınız ilanı bulamadınız mı?</h2>
-      <p class="lede" style="margin:0 auto 24px;">Danışmanlarımız portföye girmemiş seçenekleri de değerlendirebilir. İhtiyacınızı bize iletin.</p>
-      <a class="btn btn--primary" href="iletisim.html">İletişime Geç</a>
     </div>
   </section>
 
