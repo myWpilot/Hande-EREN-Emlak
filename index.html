@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="tr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-28V6E3KNZC"></script>
+<!-- Google tag (gtag.js) - defer eklenerek ana ileti dizisi yükü hafifletildi -->
+<script async defer src="https://www.googletagmanager.com/gtag/js?id=G-28V6E3KNZC"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -15,11 +15,21 @@
 <meta name="description" content="Hande Eren — Kadıköy, 19 Mayıs, Sahrayıcedit ve Kozyatağı başta olmak üzere tüm İstanbul'da gayrimenkul danışmanlığı. Satılık ve kiralık portföy.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="favicon.svg">
+
+<!-- 1. Yazı Tipleri İçin Ön Bağlantılar -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Work+Sans:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Work+Sans:wght@400;600&display=swap"></noscript>
-<link rel="stylesheet" href="css/styles.css">
+
+<!-- 2. HIZLI BOYAMA: Font yüklenirken sistem fontunu gösteren asenkron yapı -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Work+Sans:wght@400;600&display=swap" media="print" onload="this.media='all'">
+
+<!-- 3. OLUŞTURMA ENGELİNİ KALDIRMA: styles.css artık sayfayı kilitlemeyecek -->
+<link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Work+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+</noscript>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -109,7 +119,7 @@
 
   <section class="hero">
     <div class="container hero__inner">
-      <span class="eyebrow">Kadıköy &amp; İstanbul Gayrimenkul Danışmanı</span>
+      <span class="eyebrow">Kadıköy &amp; İstanbul Gayrimenekul Danışmanı</span>
       <h1>Kadıköy'ü bilen bir danışmanla doğru karar verin.</h1>
       <p class="lede">19 Mayıs, Sahrayıcedit ve Kozyatağı'nda uzman, tüm İstanbul'da aktif. Satılık veya kiralık arayışınızda doğru mülkü birlikte buluruz.</p>
       <div class="hero__actions">
