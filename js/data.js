@@ -14,13 +14,13 @@ const BRAND = {
   phoneDisplay: "0532 628 08 98",
   whatsapp: "905326280898",
   email: "hande.eren@kww.com.tr",
-  addressLines: ["Keller Williams Cadde", "Kadıköy, İstanbul"],
-  mapQuery: "Keller Williams Cadde Kadıköy İstanbul",
+  addressLines: ["Keller Williams Cadde", "Bağdat Cad. No:394 D:7-8, Suadiye", "34726 Kadıköy / İstanbul"],
+  mapQuery: "Keller Williams Cadde Bağdat Caddesi 394 Suadiye Kadıköy İstanbul",
   hours: "Hafta içi 09:00–19:00, Cumartesi 10:00–17:00",
   social: {
-    instagram: "#",
+    instagram: "https://www.instagram.com/kwhande.theoneteam",
     facebook: "#",
-    linkedin: "#"
+    linkedin: "https://www.linkedin.com/in/hande-eren-1090863b/"
   },
   listingsSheetUrl: ""
 };
