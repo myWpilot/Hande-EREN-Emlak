@@ -18,13 +18,18 @@
   .panel-user{display:flex;align-items:center;gap:14px;font-size:0.85rem;color:#C9D6D4;}
   .panel-body{padding:36px 0 80px;}
   .panel-toprow{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap;}
+  .panel-hint{color:#7A8A8C;font-size:0.82rem;margin-bottom:14px;}
   .panel-table{width:100%;border-collapse:collapse;background:var(--c-white);border-radius:var(--radius-md);overflow:hidden;box-shadow:0 1px 0 var(--c-line);}
   .panel-table th{text-align:left;font-size:0.74rem;text-transform:uppercase;letter-spacing:0.04em;color:#7A8A8C;padding:12px 16px;border-bottom:1px solid var(--c-line);}
   .panel-table td{padding:12px 16px;border-bottom:1px solid var(--c-line);font-size:0.9rem;vertical-align:middle;}
   .panel-table tr:last-child td{border-bottom:none;}
+  .panel-table tr.dragging{opacity:0.35;}
+  .drag-handle{cursor:grab;color:#B7C2C1;font-size:1rem;user-select:none;padding:0 4px;}
+  .drag-handle:active{cursor:grabbing;}
   .panel-thumb{width:54px;height:40px;border-radius:6px;object-fit:cover;background:var(--c-mist);display:block;}
   .panel-badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:0.72rem;font-weight:600;background:var(--c-mist);color:var(--c-deep);}
   .panel-badge--inactive{background:#E9EDEC;color:#7A8A8C;}
+  .panel-badge--hot{background:rgba(11,43,51,0.9);color:#E9C88C;}
   .panel-actions{display:flex;gap:8px;}
   .icon-btn{border:1px solid var(--c-line);background:#fff;border-radius:8px;padding:6px 10px;font-size:0.8rem;cursor:pointer;color:var(--c-deep);}
   .icon-btn:hover{background:var(--c-mist);}
@@ -35,9 +40,13 @@
   .photo-upload-zone{border:2px dashed var(--c-line);border-radius:var(--radius-md);padding:24px;text-align:center;cursor:pointer;color:#7A8A8C;font-size:0.88rem;}
   .photo-upload-zone:hover{border-color:var(--c-brass);color:var(--c-deep);}
   .photo-previews{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
-  .photo-preview{position:relative;width:84px;height:64px;border-radius:8px;overflow:hidden;}
+  .photo-preview{position:relative;width:104px;height:80px;border-radius:8px;overflow:hidden;border:2px solid transparent;}
+  .photo-preview.is-cover{border-color:var(--c-brass);}
   .photo-preview img{width:100%;height:100%;object-fit:cover;display:block;}
-  .photo-preview button{position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:50%;border:none;background:rgba(0,0,0,0.6);color:#fff;font-size:12px;line-height:1;cursor:pointer;}
+  .photo-preview button.photo-preview__remove{position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:50%;border:none;background:rgba(0,0,0,0.6);color:#fff;font-size:12px;line-height:1;cursor:pointer;}
+  .photo-preview__cover-tag{position:absolute;bottom:0;left:0;right:0;background:var(--c-brass);color:var(--c-deep-2);font-size:0.65rem;font-weight:700;text-align:center;padding:2px 0;letter-spacing:0.03em;}
+  .photo-preview__cover-btn{position:absolute;bottom:0;left:0;right:0;background:rgba(11,43,51,0.78);color:#fff;font-size:0.65rem;font-weight:600;text-align:center;padding:3px 0;border:none;cursor:pointer;letter-spacing:0.02em;}
+  .photo-preview__cover-btn:hover{background:rgba(11,43,51,0.95);}
   .upload-status{font-size:0.82rem;color:#7A8A8C;margin-top:8px;}
   .panel-empty{text-align:center;padding:60px 20px;color:#7A8A8C;}
   .setup-banner{background:#FFF6E0;color:#7A5E1E;padding:14px 20px;border-radius:var(--radius-sm);font-size:0.88rem;margin-bottom:24px;line-height:1.6;}
@@ -63,7 +72,7 @@
 </header>
 
 <main class="panel-body">
-  <div class="container" style="max-width:1100px;">
+  <div class="container" style="max-width:1150px;">
 
     <div class="setup-banner hidden" id="setup-banner">
       Bu panel henüz bağlanmamış. <code>js/firebase-config.js</code> dosyasını
@@ -79,16 +88,19 @@
         </div>
         <button class="btn btn--primary" id="new-listing-btn">+ Yeni İlan Ekle</button>
       </div>
+      <p class="panel-hint">↕ Sırayı değiştirmek için satırları sürükleyip bırakın. Sitede ilanlar bu sırayla görünür (Talep Gören ilanlar her zaman en üstte).</p>
 
       <div id="list-table-wrap">
         <table class="panel-table" id="panel-table">
           <thead>
             <tr>
               <th></th>
+              <th></th>
               <th>İlan</th>
               <th>İlçe</th>
               <th>Fiyat</th>
               <th>Öne Çıkan</th>
+              <th>Talep Gören</th>
               <th>Durum</th>
               <th></th>
             </tr>
@@ -259,6 +271,16 @@
           </div>
         </div>
 
+        <div class="form-row form-row--split">
+          <div class="form-field">
+            <label for="f-hot">Talep Gören İlan mı?</label>
+            <select id="f-hot" name="hot">
+              <option value="hayir">Hayır</option>
+              <option value="evet">Evet</option>
+            </select>
+          </div>
+        </div>
+
         <div class="form-row">
           <div class="form-field">
             <label>Fotoğraflar</label>
@@ -268,6 +290,7 @@
             </div>
             <div class="upload-status" id="upload-status"></div>
             <div class="photo-previews" id="photo-previews"></div>
+            <p class="panel-hint" style="margin-top:8px;margin-bottom:0;">Kapak fotoğrafı, ilan kartında ve listede gösterilen ana fotoğraftır. Bir fotoğrafın üzerine gelip "Kapak Yap"a basarak değiştirebilirsiniz — ilk yüklenen fotoğraf otomatik kapak olur.</p>
           </div>
         </div>
 
@@ -313,11 +336,10 @@
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
   import {
     getFirestore, collection, addDoc, doc, getDoc, getDocs, updateDoc,
-    deleteDoc, query, orderBy, serverTimestamp
+    deleteDoc, serverTimestamp
   } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
   if (!FIREBASE_ENABLED) {
-    // Kurulum tamamlanmamış: formu devre dışı bırak, kullanıcıyı bilgilendir.
     document.getElementById('new-listing-btn').disabled = true;
     document.getElementById('list-count').textContent = 'Panel henüz bağlanmadı.';
   } else {
@@ -380,7 +402,7 @@
     attachCurrencyFormatting(document.getElementById('f-price'));
     attachCurrencyFormatting(document.getElementById('f-discount'));
 
-    /* ---------- Fotoğraf yükleme (Cloudinary) — DÜZELTİLMİŞ ---------- */
+    /* ---------- Fotoğraf yükleme (Cloudinary) + Kapak fotoğrafı seçimi ---------- */
     let uploadedImages = [];
     const dropZone = document.getElementById('photo-drop-zone');
     const photoInput = document.getElementById('photo-input');
@@ -435,11 +457,27 @@
 
     function renderPhotoPreviews(){
       photoPreviews.innerHTML = uploadedImages.map(function(url, i){
-        return '<div class="photo-preview"><img src="' + url + '" alt=""><button type="button" data-i="' + i + '">×</button></div>';
+        const isCover = i === 0;
+        return '<div class="photo-preview' + (isCover ? ' is-cover' : '') + '">' +
+          '<img src="' + url + '" alt="">' +
+          '<button type="button" class="photo-preview__remove" data-remove="' + i + '">×</button>' +
+          (isCover
+            ? '<span class="photo-preview__cover-tag">Kapak</span>'
+            : '<button type="button" class="photo-preview__cover-btn" data-cover="' + i + '">Kapak Yap</button>') +
+        '</div>';
       }).join('');
-      photoPreviews.querySelectorAll('button').forEach(function(btn){
+
+      photoPreviews.querySelectorAll('[data-remove]').forEach(function(btn){
         btn.addEventListener('click', function(){
-          uploadedImages.splice(parseInt(btn.getAttribute('data-i'),10), 1);
+          uploadedImages.splice(parseInt(btn.getAttribute('data-remove'),10), 1);
+          renderPhotoPreviews();
+        });
+      });
+      photoPreviews.querySelectorAll('[data-cover]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          const idx = parseInt(btn.getAttribute('data-cover'),10);
+          const chosen = uploadedImages.splice(idx, 1)[0];
+          uploadedImages.unshift(chosen);
           renderPhotoPreviews();
         });
       });
@@ -477,14 +515,29 @@
     document.getElementById('back-to-list-btn').addEventListener('click', showListView);
     document.getElementById('cancel-btn').addEventListener('click', showListView);
 
+    /* ---------- Sıralama yardımcıları ----------
+       hot ilanlar her zaman önce; ardından sortOrder küçükten büyüğe
+       (daha negatif = daha yeni/daha üstte). sortOrder yoksa 0 kabul edilir,
+       böylece eski/etiketlenmemiş ilanlar otomatik olarak en alta düşer. */
+    function sortOrderOf(l){ return (typeof l.sortOrder === 'number') ? l.sortOrder : 0; }
+    function sortListings(list){
+      return list.slice().sort(function(a, b){
+        const ah = a.hot ? 0 : 1, bh = b.hot ? 0 : 1;
+        if (ah !== bh) return ah - bh;
+        return sortOrderOf(a) - sortOrderOf(b);
+      });
+    }
+
     /* ---------- Listeyi yükle ---------- */
+    let currentListDocs = [];
+
     function loadListingsList(){
       const tbody = document.getElementById('panel-table-body');
       const countEl = document.getElementById('list-count');
       const emptyEl = document.getElementById('panel-empty');
       const tableWrap = document.getElementById('list-table-wrap');
       countEl.textContent = 'Yükleniyor…';
-      getDocs(query(collection(db, 'listings'), orderBy('createdAt', 'desc')))
+      getDocs(collection(db, 'listings'))
         .then(function(snapshot){
           if (snapshot.empty) {
             countEl.textContent = '0 ilan';
@@ -494,19 +547,30 @@
           }
           tableWrap.classList.remove('hidden');
           emptyEl.classList.add('hidden');
-          countEl.textContent = snapshot.size + ' ilan listelendi';
-          tbody.innerHTML = '';
+
+          let docs = [];
           snapshot.forEach(function(docSnap){
-            const l = docSnap.data();
-            const id = docSnap.id;
+            docs.push(Object.assign({ id: docSnap.id }, docSnap.data()));
+          });
+          docs = sortListings(docs);
+          currentListDocs = docs;
+
+          countEl.textContent = docs.length + ' ilan listelendi';
+          tbody.innerHTML = '';
+          docs.forEach(function(l){
+            const id = l.id;
             const thumb = (l.images && l.images.length) ? l.images[0] : '';
             const tr = document.createElement('tr');
+            tr.setAttribute('draggable', 'true');
+            tr.setAttribute('data-id', id);
             tr.innerHTML =
+              '<td><span class="drag-handle" title="Sürükleyerek sırala">⠿</span></td>' +
               '<td>' + (thumb ? '<img class="panel-thumb" src="' + thumb + '" alt="">' : '<div class="panel-thumb"></div>') + '</td>' +
               '<td>' + (l.title || '—') + '</td>' +
               '<td>' + (l.district || '—') + '</td>' +
               '<td>' + (l.price ? Number(l.price).toLocaleString('tr-TR') + ' ₺' : '—') + '</td>' +
               '<td>' + (l.featured ? '<span class="panel-badge">Evet</span>' : '<span class="panel-badge panel-badge--inactive">Hayır</span>') + '</td>' +
+              '<td>' + (l.hot ? '<span class="panel-badge panel-badge--hot">Evet</span>' : '<span class="panel-badge panel-badge--inactive">Hayır</span>') + '</td>' +
               '<td>' + (l.status === 'aktif' ? '<span class="panel-badge">Aktif</span>' : '<span class="panel-badge panel-badge--inactive">' + (STATUS_LABEL[l.status] || l.status) + '</span>') + '</td>' +
               '<td class="panel-actions">' +
                 '<button class="icon-btn" data-edit="' + id + '">Düzenle</button>' +
@@ -520,9 +584,56 @@
           tbody.querySelectorAll('[data-delete]').forEach(function(btn){
             btn.addEventListener('click', function(){ deleteListing(btn.getAttribute('data-delete')); });
           });
+          attachDragHandlers(tbody, countEl);
         })
         .catch(function(err){
           countEl.textContent = 'Liste yüklenemedi: ' + err.message;
+        });
+    }
+
+    /* ---------- Sürükle-bırak sıralama ---------- */
+    function attachDragHandlers(tbody, countEl){
+      let draggingRow = null;
+
+      Array.from(tbody.querySelectorAll('tr')).forEach(function(row){
+        row.addEventListener('dragstart', function(){
+          draggingRow = row;
+          row.classList.add('dragging');
+        });
+        row.addEventListener('dragend', function(){
+          row.classList.remove('dragging');
+          draggingRow = null;
+          persistNewOrder(tbody, countEl);
+        });
+        row.addEventListener('dragover', function(e){
+          e.preventDefault();
+          if (!draggingRow || draggingRow === row) return;
+          const rect = row.getBoundingClientRect();
+          const after = (e.clientY - rect.top) > rect.height / 2;
+          if (after) {
+            row.parentNode.insertBefore(draggingRow, row.nextSibling);
+          } else {
+            row.parentNode.insertBefore(draggingRow, row);
+          }
+        });
+      });
+    }
+
+    function persistNewOrder(tbody, countEl){
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const base = -Date.now();
+      const updates = rows.map(function(row, idx){
+        const id = row.getAttribute('data-id');
+        return updateDoc(doc(db, 'listings', id), { sortOrder: base - idx });
+      });
+      countEl.textContent = 'Sıralama kaydediliyor…';
+      Promise.all(updates)
+        .then(function(){
+          countEl.textContent = rows.length + ' ilan listelendi — sıralama kaydedildi.';
+        })
+        .catch(function(err){
+          alert('Sıralama kaydedilemedi: ' + err.message);
+          loadListingsList();
         });
     }
 
@@ -550,6 +661,7 @@
         form.totalFloors.value = l.totalFloors || '';
         form.status.value = l.status || 'aktif';
         form.featured.value = l.featured ? 'evet' : 'hayir';
+        form.hot.value = l.hot ? 'evet' : 'hayir';
         form.desc.value = l.desc || '';
         form.descEn.value = l.descEn || '';
         uploadedImages = (l.images || []).slice();
@@ -590,6 +702,7 @@
         totalFloors: form.totalFloors.value !== '' ? Number(form.totalFloors.value) : null,
         status: form.status.value,
         featured: form.featured.value === 'evet',
+        hot: form.hot.value === 'evet',
         art: TYPE_TO_ART[form.type.value] || 'apart',
         images: uploadedImages.slice(),
         desc: form.desc.value.trim(),
@@ -598,7 +711,7 @@
 
       const savePromise = currentEditId
         ? updateDoc(doc(db, 'listings', currentEditId), data)
-        : addDoc(collection(db, 'listings'), Object.assign({}, data, { createdAt: serverTimestamp() }));
+        : addDoc(collection(db, 'listings'), Object.assign({}, data, { createdAt: serverTimestamp(), sortOrder: -Date.now() }));
 
       savePromise.then(function(){
         saveBtn.disabled = false;
