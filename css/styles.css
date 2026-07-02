@@ -339,3 +339,16 @@ h3{font-size:clamp(1.2rem,2vw,1.45rem);}
   width:12px;
   height:12px;
 }
+/* ===================================================================
+   İLAN KARTI HOVER EFEKTİ
+   Fare ile üzerine gelince kart hafifçe büyür ve yükselir
+   (blog kartlarındaki .blog-card:hover ile aynı mantık).
+   =================================================================== */
+.listing-card{
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.listing-card:hover{
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 14px 32px rgba(11,43,51,0.16);
+  z-index: 2;
+}
