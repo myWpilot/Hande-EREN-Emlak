@@ -70,8 +70,8 @@ function listingCardHTML(l){
     ? '<span class="listing-card__badge listing-card__badge--status">' + STATUS_LABEL[l.status] + '</span>'
     : '<span class="listing-card__badge' + (l.deal==='kiralik' ? ' listing-card__badge--rent' : '') + '">' + dealLabel(l.deal) + '</span>';
 
-  const hotBadge = l.hot
-    ? '<span class="listing-card__badge listing-card__badge--hot"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c1 3-1 4.5-2.5 6C8 9.5 7 11 7 13.5A5 5 0 0012 18.5a5 5 0 005-5c0-1.8-1-3-2-4 .3 1.5-.3 2.5-1 3-.2-2-1-3-2-4.5C11.5 6.5 11.5 4 12 2z"/></svg>Talep Gören</span>'
+const hotBadge = l.hot
+    ? '<span class="listing-card__badge listing-card__badge--hot"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>Talep Gören</span>'
     : '';
 
   const visual = (l.images && l.images.length)
