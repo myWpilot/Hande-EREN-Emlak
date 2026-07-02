@@ -432,6 +432,19 @@
         photoInput.value = '';
       });
     }
+
+    function renderPhotoPreviews(){
+      photoPreviews.innerHTML = uploadedImages.map(function(url, i){
+        return '<div class="photo-preview"><img src="' + url + '" alt=""><button type="button" data-i="' + i + '">×</button></div>';
+      }).join('');
+      photoPreviews.querySelectorAll('button').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          uploadedImages.splice(parseInt(btn.getAttribute('data-i'),10), 1);
+          renderPhotoPreviews();
+        });
+      });
+    }
+
     /* ---------- Görünüm geçişleri ---------- */
     const viewList = document.getElementById('view-list');
     const viewForm = document.getElementById('view-form');
