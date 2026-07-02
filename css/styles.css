@@ -316,19 +316,22 @@ h3{font-size:clamp(1.2rem,2vw,1.45rem);}
    Bu blok css/styles.css dosyasının EN SONUNA eklenmiştir.
    Mevcut hiçbir kuralı değiştirmez, sadece yeni bir sınıf ekler.
    =================================================================== */
+.listing-card__badge{
+  box-shadow:0 2px 8px rgba(0,0,0,0.22);
+}
 .listing-card__badge--hot{
   left:auto;
   right:14px;
   top:14px;
   border-radius:6px;
-  background:rgba(11,43,51,0.88);
-  color:var(--c-brass-light);
-  border:1px solid rgba(176,141,87,0.7);
+  background:#0B2B33;
+  color:#F5C878;
+  border:1px solid rgba(245,200,120,0.55);
   display:inline-flex;
   align-items:center;
   gap:5px;
-  font-size:0.7rem;
-  font-weight:600;
+  font-size:0.72rem;
+  font-weight:700;
   padding:5px 10px;
   letter-spacing:0.02em;
 }
