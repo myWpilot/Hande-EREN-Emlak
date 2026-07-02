@@ -380,7 +380,7 @@
     attachCurrencyFormatting(document.getElementById('f-price'));
     attachCurrencyFormatting(document.getElementById('f-discount'));
 
-    /* ---------- Fotoğraf yükleme (Cloudinary) ---------- */
+    /* ---------- Fotoğraf yükleme (Cloudinary) — DÜZELTİLMİŞ ---------- */
     let uploadedImages = [];
     const dropZone = document.getElementById('photo-drop-zone');
     const photoInput = document.getElementById('photo-input');
@@ -399,6 +399,7 @@
         if(!files.length) return;
         uploadStatus.textContent = '0 / ' + files.length + ' fotoğraf yükleniyor…';
         let done = 0;
+        let failed = 0;
         files.forEach(function(file){
           const formData = new FormData();
           formData.append('file', file);
@@ -409,35 +410,28 @@
           .then(function(res){ return res.json(); })
           .then(function(data){
             done++;
-            uploadStatus.textContent = done + ' / ' + files.length + ' fotoğraf yüklendi.';
             if (data.secure_url) {
               uploadedImages.push(data.secure_url);
               renderPhotoPreviews();
+              uploadStatus.textContent = (done - failed) + ' / ' + files.length + ' fotoğraf yüklendi.';
+            } else {
+              failed++;
+              console.error('Cloudinary hatası:', data.error);
+              uploadStatus.textContent = 'Yükleme hatası: ' + (data.error && data.error.message ? data.error.message : 'bilinmeyen bir hata oluştu');
             }
-            if (done === files.length) {
+            if (done === files.length && failed === 0) {
               setTimeout(function(){ uploadStatus.textContent = ''; }, 2500);
             }
           })
-          .catch(function(){
-            done++;
-            uploadStatus.textContent = 'Bir fotoğraf yüklenemedi, diğerlerine devam ediliyor…';
+          .catch(function(err){
+            done++; failed++;
+            console.error('Yükleme isteği başarısız:', err);
+            uploadStatus.textContent = 'Bir fotoğraf yüklenemedi (bağlantı hatası), diğerlerine devam ediliyor…';
           });
         });
         photoInput.value = '';
       });
     }
-    function renderPhotoPreviews(){
-      photoPreviews.innerHTML = uploadedImages.map(function(url, i){
-        return '<div class="photo-preview"><img src="' + url + '" alt=""><button type="button" data-i="' + i + '">×</button></div>';
-      }).join('');
-      photoPreviews.querySelectorAll('button').forEach(function(btn){
-        btn.addEventListener('click', function(){
-          uploadedImages.splice(parseInt(btn.getAttribute('data-i'),10), 1);
-          renderPhotoPreviews();
-        });
-      });
-    }
-
     /* ---------- Görünüm geçişleri ---------- */
     const viewList = document.getElementById('view-list');
     const viewForm = document.getElementById('view-form');
