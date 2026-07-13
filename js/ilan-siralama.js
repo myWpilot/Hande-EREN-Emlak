@@ -15,6 +15,21 @@
      olarak kaydedilir ve site bunu yansıtır.
    =================================================================== */
 
+/* ---------- Cloudinary görsel optimizasyonu ----------
+   Yüklenen fotoğraflar telefon kamerasının orijinal çözünürlüğünde
+   (ör. 4000x3000px) geliyor ama kartlarda çok küçük gösteriliyor.
+   Bu fonksiyon, Cloudinary URL'sine "w_800,c_limit,q_auto,f_auto"
+   dönüşümünü ekleyerek görseli indirme anında küçültüp optimize eder
+   — yeniden yükleme gerekmez, mevcut fotoğraflar için de çalışır. */
+function cloudinaryOptimize(url, width) {
+  if (!url || url.indexOf('res.cloudinary.com') === -1) return url;
+  var marker = '/upload/';
+  var idx = url.indexOf(marker);
+  if (idx === -1) return url;
+  var insertAt = idx + marker.length;
+  return url.slice(0, insertAt) + 'w_' + width + ',c_limit,q_auto,f_auto/' + url.slice(insertAt);
+}
+
 /* ---------- Firestore değer okuma: timestamp desteği eklendi ---------- */
 function unwrapFirestoreValue(v){
   if(v === undefined || v === null) return null;
@@ -70,12 +85,12 @@ function listingCardHTML(l){
     ? '<span class="listing-card__badge listing-card__badge--status">' + STATUS_LABEL[l.status] + '</span>'
     : '<span class="listing-card__badge' + (l.deal==='kiralik' ? ' listing-card__badge--rent' : '') + '">' + dealLabel(l.deal) + '</span>';
 
-const hotBadge = l.hot
-    ? '<span class="listing-card__badge listing-card__badge--hot"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>Talep Gören</span>'
+  const hotBadge = l.hot
+    ? '<span class="listing-card__badge listing-card__badge--hot"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c1 3-1 4.5-2.5 6C8 9.5 7 11 7 13.5A5 5 0 0012 18.5a5 5 0 005-5c0-1.8-1-3-2-4 .3 1.5-.3 2.5-1 3-.2-2-1-3-2-4.5C11.5 6.5 11.5 4 12 2z"/></svg>Talep Gören</span>'
     : '';
 
   const visual = (l.images && l.images.length)
-    ? '<img src="' + l.images[0] + '" alt="' + l.title + '" loading="lazy" width="400" height="280" style="width:100%;height:100%;object-fit:cover;">'
+    ? '<img src="' + cloudinaryOptimize(l.images[0], 800) + '" alt="' + l.title + '" loading="lazy" width="400" height="280" style="width:100%;height:100%;object-fit:cover;">'
     : (ART[l.art] || ART.apart);
 
   const area = l.netArea || l.grossArea;
