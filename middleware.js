@@ -13,7 +13,8 @@ const BOT_PATTERNS = [
   'claudebot', 'claude-web', 'anthropic-ai',
   'google-extended', 'applebot-extended',
   'ccbot', 'cohere-ai', 'bytespider',
-  'facebookexternalhit', 'meta-externalagent'
+  'facebookexternalhit', 'meta-externalagent',
+  'googlebot'
 ];
 
 function isAiBot(userAgent) {
