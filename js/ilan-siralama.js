@@ -104,7 +104,7 @@ function listingCardHTML(l){
       '</a>' +
       '<div class="listing-card__body">' +
         '<span class="listing-card__district">' + l.district + (l.neighborhood ? ' · ' + l.neighborhood : '') + '</span>' +
-        '<span class="listing-card__eids"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><path d="M12 2l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V5z"/></svg>EİDS Onaylı</span>' +
+        '<span style="display:inline-flex;align-items:center;gap:4px;font-family:var(--font-mono);font-size:0.68rem;font-weight:600;color:#1D6A3C;background:#E9F7EF;border:1px solid rgba(39,174,96,0.35);border-radius:20px;padding:3px 9px;margin-left:8px;vertical-align:middle;line-height:1;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:11px;height:11px;flex-shrink:0;display:block;"><path d="M9 12l2 2 4-4"/><path d="M12 2l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V5z"/></svg>EİDS Onaylı</span>' +
         '<h3 class="listing-card__title"><a href="ilan-detay.html?id=' + l.id + '">' + l.title + '</a></h3>' +
         '<div class="listing-card__specs">' +
           '<span>' + icon('bed') + ' ' + l.rooms + '</span>' +
