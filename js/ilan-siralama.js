@@ -104,6 +104,7 @@ function listingCardHTML(l){
       '</a>' +
       '<div class="listing-card__body">' +
         '<span class="listing-card__district">' + l.district + (l.neighborhood ? ' · ' + l.neighborhood : '') + '</span>' +
+        '<span class="listing-card__eids"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><path d="M12 2l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V5z"/></svg>EİDS Onaylı</span>' +
         '<h3 class="listing-card__title"><a href="ilan-detay.html?id=' + l.id + '">' + l.title + '</a></h3>' +
         '<div class="listing-card__specs">' +
           '<span>' + icon('bed') + ' ' + l.rooms + '</span>' +
